@@ -1,5 +1,6 @@
 package com.bjp.ba01;
 
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 
@@ -53,12 +54,12 @@ public class MyAspect {
     //     System.out.println("1省略了访问范围=========前置通知，切面功能：在目标方法执行之前输出执行时间："+new Date());
     // }
 
-    //方法执行之前               访问范围 返回值 包名        实现类          方法     形参
-    @Before(value = "execution( void *..SomeServiceImpl.doSome(String,Integer))")
-    public void myBefore(){
-        //    这里解释你切面要执行的功能代码
-        System.out.println("2把包名省略为*.. =====前置通知，切面功能：在目标方法执行之前输出执行时间："+new Date());
-    }
+    // //方法执行之前               访问范围 返回值 包名        实现类          方法     形参
+    // @Before(value = "execution( void *..SomeServiceImpl.doSome(String,Integer))")
+    // public void myBefore(){
+    //     //    这里解释你切面要执行的功能代码
+    //     System.out.println("2把包名省略为*.. =====前置通知，切面功能：在目标方法执行之前输出执行时间："+new Date());
+    // }
 
     // //方法执行之前               访问范围 返回值 包名        实现类          方法     形参
     // @Before(value = "execution(* *..SomeServiceImpl.do*(..))")
@@ -76,9 +77,36 @@ public class MyAspect {
 
 
     //如果参数没有写完整的话，配置文件中的aspectj-autoproxy会扫不到对应的代理类
+    // @Before(value = "execution( void *..SomeServiceImpl.doSome(String,Integer))")
+    // public void myBefore2(){
+    // //    这里解释你切面要执行的功能代码
+    // System.out.println("2把包名省略为*.. =====前置通知，切面功能：在目标方法执行之前输出执行时间："+new Date());
+    // }
+
+    /**
+     *指定通知方法中的参数：JointPoint
+     * JointPoint代表的是业务方法 ，也就是要加入切面功能的业务方法(也就是doSome方法)
+     *      作用是：可以在通知方法中获取方法执行时的信息，例如 方法名称、方法实参
+     *      如果你的切面功能中需要用到方法的信息，就加入JointPoint
+     *      这个JointPoint参数的值是由框架赋予的，必须是第一个位置的参数
+     */
     @Before(value = "execution( void *..SomeServiceImpl.doSome(String,Integer))")
-    public void myBefore2(){
-    //    这里解释你切面要执行的功能代码
-    System.out.println("2把包名省略为*.. =====前置通知，切面功能：在目标方法执行之前输出执行时间："+new Date());
+    public void myBefore(JoinPoint joinPoint){
+        //获取方法的完整定义
+        System.out.println("方法的签名(定义)="+joinPoint.getSignature());
+        System.out.println("方法的名称="+joinPoint.getSignature().getName());
+        //获取方法的实参
+        System.out.println("方法的实参=");
+        Object[] args = joinPoint.getArgs();
+        for (Object arg : args) {
+            System.out.println("参数="+arg);
+        }
+
+
+        //    这里解释你切面要执行的功能代码
+        System.out.println("2把包名省略为*.. =====前置通知，切面功能：在目标方法执行之前输出执行时间："+new Date());
     }
+
+
+
 }
