@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+        问题的提出：当我们一个类里面有好多的引用对象的时候，会出现冗余代码，也就是好多的
+            <property name="school" ref="mySchool"/>
+            <property name="school" ref="mySchool"/>
+            <property name="school" ref="mySchool"/>
+            ...
+         问题解决：
+         引用类型的自动注入：spring框架根据某些规则可以给引用类型赋值。不用我们手动赋值了
+         使用的规则byName，byType
+         1.byName（按名称注入）：java类中引用类型的属性名和Spring容器（配置文件）<bean>的id名称一样，
+         且数据类型是一致的，这样容器中的bean，spring能够赋值给引用类型。（1.名称一样 2.类型一致）
+         语法规则：
+         <bean id="xx" class="yyy" autowire="byName">
+            简单类型属性赋值
+         </bean>
+
+         2.byType（按类型注入）：java类中引用类型的数据类型和Spring容器中（配置文件）<bean>的class属性是
+                              同源关系，这样的bean能够赋值给引用类型。
+                             同源：就是一类的意思：
+                             1.java类中引用类型的数据类型是和bean的class的值是一样的
+                             2.java类中引用类型的数据类型是和bean的class的值是父子类关系
+                             3.java类中引用类型的数据类型是和bean的class的值是接口和实现类关系的
+        语法规则：
+         <bean id="xx" class="yyy" autowire="byType">
+            简单类型属性赋值
+         </bean>
+         注意：在byType中，在xml配置文件中只能有一个符合条件的，多余一个是错误的
+         按类型注入只能有一个对应的对象：expected single matching bean but found 2
+
+    -->
+
+    <!--byName-->
+    <bean id="myStudent" class="com.bjp.ba05.Student" autowire="byType">
+        <property name="name" value="张哄"/><!-- setName("lisi")-->
+        <property name="age" value="26"/><!-- setAge(21)-->
+        <!--引用类型的赋值-->
+        <!--我们这边将引用类型注释掉 然后利用byName的方式进行注入-->
+        <!--<property name="school" ref="mySchool"/>&lt;!&ndash; setSchool(21)&ndash;&gt;-->
+    </bean>
+
+<!--    声明school对象  前后关系没有关系 如果没有创建对应对象 会二次扫描文件-->
+<!--    <bean id="mySchool" class="com.bjp.ba05.School">-->
+<!--        <property name="name" value="人名大学"/>-->
+<!--        <property name="address" value="BJ 海淀区"/>-->
+<!--    </bean>-->
+
+<!--    声明一个school的子类-->
+    <bean id="primarySchool" class="com.bjp.ba05.PrimarySchool">
+        <property name="name" value="北京小学"/>
+        <property name="address" value="北京海淀"/>
+    </bean>
+
+    <!--<bean id="primarySchool2" class="com.bjp.ba05.PrimarySchool">-->
+    <!--    <property name="name" value="北京第二小学"/>-->
+    <!--    <property name="address" value="北京海淀"/>-->
+    <!--</bean>-->
+
+</beans>

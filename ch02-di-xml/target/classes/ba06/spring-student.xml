@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <!--
+    student模块所有bean的声明，
+    -->
+
+    <!--byName-->
+    <bean id="myStudent" class="com.bjp.ba06.Student" autowire="byType">
+        <property name="name" value="许晗"/><!-- setName("lisi")-->
+        <property name="age" value="27"/><!-- setAge(21)-->
+        <!--引用类型的赋值-->
+        <!--我们这边将引用类型注释掉 然后利用byName的方式进行注入-->
+        <!--<property name="school" ref="mySchool"/>&lt;!&ndash; setSchool(21)&ndash;&gt;-->
+    </bean>
+
+
+</beans>

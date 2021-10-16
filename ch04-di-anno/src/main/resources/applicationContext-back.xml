@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--
+    声明组件扫描器(component-scan),组件就是java对象的意思，组件扫描器就是找java对象的意思
+    base-package:指定注解在你的项目中的包名
+    component-scan工作方式：spring会扫描遍历base-package指定的包
+        把 包 中和 子包 中的所有的类，找到类中的注解，按照注解的功能创建对象，或者给属性赋值
+
+    加入了component-scan标签，配置文件的变化（了解即可）：
+        1.加入了一个新的约束文件，spring-context.xsd
+        2.给这个新的约束文件起个命名空间的名称 context
+    -->
+    <context:component-scan base-package="com.ba01"  />
+
+    <!--我一个spring项目肯定有多个包-->
+    <!--指定多个包的三种方式-->
+    <!--第一种方式：使用多次组件扫描器，指定不同的包 -->
+    <context:component-scan base-package="com.ba01"  />
+    <context:component-scan base-package="com.ba02"  />
+
+    <!--第二种方式：使用分隔符（;或者,）分隔多个包名-->
+    <context:component-scan base-package="com.ba01;com.ba02"  />
+
+    <!--第三种方式：指定父包 但是这样会导致搜索的时间比较长 会做一些无用的包的扫描-->
+    <context:component-scan base-package="com"  />
+
+
+
+
+</beans>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/../ch01-helloSpring/pom.xml" />
+        <option value="$PROJECT_DIR$/ch02-di-xml/pom.xml" />
+        <option value="$PROJECT_DIR$/ch01-helloSpring/pom.xml" />
+        <option value="$PROJECT_DIR$/ch04-di-anno/pom.xml" />
+        <option value="$PROJECT_DIR$/ch06-aop-aspecj/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_14">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

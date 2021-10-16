@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--声明student对象
+        注入：就是赋值的意思
+        简单类型：Spring 中规定的java的基本数据类型和String都是简单类型
+        di：给属性赋值
+        1。set注入（设值注入） ：Spring调用类的set方法（必须要有set方法 不然会报错），你可以在set方法中完成属性的赋值。而且这个是在构造方法之后执行的。
+            1）简单类型的set注入
+                <bean id="xxx" class="yyy">
+                    <property name="属性名字" value="此属性的值"/>
+                    一个property只能给一个属性赋值 多个属性只能写多个property
+                    <property...>
+                </bean>
+                就是反射找方法 通过set加上属性名做拼接 找到set方法.只是找的是
+                底层反射机制是先把首字母变成大写，然后和set拼接成方法名，再通过名字获取Method对象，再调用invoke调用方法
+
+            2)引用类型的set注入：还是spring调用引用方法
+            <bean id="xxx" class="yyy">
+                    <property name="属性名字" ref="bean的id（bean的对象的名称）"/>
+                    一个property只能给一个属性赋值 多个属性只能写多个property
+                    <property...>
+            </bean>
+
+    -->
+
+    <bean id="myStudent" class="com.bjp.ba02.Student">
+        <property name="name" value="lisi"/><!-- setName("lisi")-->
+        <property name="age" value="26"/><!-- setAge(21)-->
+        <!--引用类型的赋值-->
+        <property name="school" ref="mySchool"/><!-- setSchool(21)-->
+    </bean>
+
+<!--    声明school对象  前后关系没有关系 如果没有创建对应对象 会二次扫描文件-->
+    <bean id="mySchool" class="com.bjp.ba02.School">
+        <property name="name" value="BJU"/>
+        <property name="address" value="BJ 海淀区"/>
+    </bean>
+
+
+</beans>
