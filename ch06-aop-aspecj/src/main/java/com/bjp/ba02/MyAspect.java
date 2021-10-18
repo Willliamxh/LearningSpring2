@@ -74,7 +74,7 @@ public class MyAspect {
 
         //修改目标方法的返回值 看看是否会影响最后方法的调用结果
         //如果我们修改了res的内容、属性值等，是否会影响最后的调用结果呢？
-
+        //其实这边就是一个值传递机制
        ((Student) res).setAge(25);
         ((Student) res).setName("xuhan");
 
