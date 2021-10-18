@@ -68,7 +68,9 @@ public class MyAspect {
 
     @AfterReturning(value="execution(* *..SomeServiceImpl.doOther2(..))",
             returning = "res")
-    public void myAfterReturning2(Object res){
+    public void myAfterReturning2(JoinPoint joinPoint,Object res){
+
+        System.out.println("后置通知方法定义："+ joinPoint.getSignature());
         //Object res 是我们的目标方法执行后的返回值，我们可以根据返回值做一些对应的处理
         System.out.println("后置通知：是在目标方法执行之后执行的，返回值是="+res);
 
