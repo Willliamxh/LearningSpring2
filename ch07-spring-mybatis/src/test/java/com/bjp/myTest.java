@@ -34,20 +34,20 @@ public class myTest {
         /*获取spring容器中的dao对象*/
         StudentDao studentDao = (StudentDao) ctx.getBean("studentDao");
 
-        Student student=new Student();
-        student.setId(8);
-        student.setName("许晗");
-        student.setAge(25);
-        student.setEmail("1232@qq.com");
+        // Student student=new Student();
+        // student.setId(8);
+        // student.setName("许晗");
+        // student.setAge(25);
+        // student.setEmail("1232@qq.com");
+        //
+        // int nums=studentDao.insertStudent(student);
+        // System.out.println("nums="+nums);
 
-        int nums=studentDao.insertStudent(student);
-        System.out.println("nums="+nums);
 
-
-        // List<Student> studentList = studentDao.selectStudents();
-        // for (int i = 0; i < studentList.size(); i++) {
-        //     System.out.println(studentList.get(i));
-        // }
+        List<Student> studentList = studentDao.selectStudents();
+        for (int i = 0; i < studentList.size(); i++) {
+            System.out.println(studentList.get(i));
+        }
     }
 
     @Test
