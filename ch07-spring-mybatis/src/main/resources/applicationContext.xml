@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
+
+    <!--把数据库的配置信息写在独立的文件中，便于修改数据库的配置内容
+        1，让spring知道jdbc.properties的位置
+
+    -->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
 
     <!--声明数据源DataSource的对象,作用是链接数据库的-->
     <!--spring在启动的时候就会创建这个类的对象-->
     <bean id="myDataSource" class="com.alibaba.druid.pool.DruidDataSource"
           init-method="init" destroy-method="close">
         <!--set注入给DruidDataSource提供链接数据库的信息-->
+        <!--使用属性配置文件中的数据 语法-->
         <property name="url" value="jdbc:mysql://localhost:3306/springdb?useSSL=true&amp;useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8"/><!--setUrl()-->
         <property name="username" value="root"/>
         <property name="password" value="123456"/>
@@ -46,6 +54,10 @@
     <!--容器中的名称：studentDao||org.apache.ibatis.binding.MapperProxy@2beee7ff-->
 
 
+    <!--声明我们的service，因为在程序中我们都是通过service来调用我们的Dao的-->
+    <bean id="studentService" class="com.bjp.service.impl.StudentServiceImpl">
+        <property name="studentDao" ref="studentDao"/><!--这个studentDao就是上面MapperScannerConfigurer创建的名称-->
+    </bean>
 
 
 </beans>

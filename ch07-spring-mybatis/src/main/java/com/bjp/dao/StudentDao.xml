@@ -6,7 +6,7 @@
 <mapper namespace="com.bjp.dao.StudentDao">
 
     <!--id 是对应的namespace中的方法名-->
-    <insert id="insetStudent">
+    <insert id="insertStudent">
         insert into springdb.student2 values (#{id},#{name},#{age},#{email})
     </insert>
 
