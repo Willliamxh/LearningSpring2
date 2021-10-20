@@ -31,12 +31,12 @@
     <!--声明sqlSessionFactoryBean类，这个类内部创建sqlSessionFactory-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <!--set注入，把数据库的连接池付给了dataSource属性 这样就能知道我们的数据库是谁了-->
-        <property name="dataSource" ref="myDataSource"/>
+        <property name="dataSource" ref="myDataSource"/><!--这边为什么是myDataSource 因为dataSource这个变量是DataSource类型的-->
         <!--mybatis主配置文件的配置
             configLocation是Resource类型的，实用类读取配置文件的
             它的赋值使用的是value，指定文件路径，使用classpath：表示文件位置
          -->
-        <property name="configLocation" value="classpath:mybatis.xml"/>
+        <property name="configLocation" value="classpath:mybatis.xml"/><!--这边为什么是value 因为configLocation这个属性的参数是String类型的-->
     </bean>
 
     <!--我们这边通过MapperScannerConfigurer创建所有的Dao对象，我们这边就是StudentDao对象-->
