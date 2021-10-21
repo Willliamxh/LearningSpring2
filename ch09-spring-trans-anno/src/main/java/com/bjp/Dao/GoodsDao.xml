@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bjp.Dao.GoodsDao">
+
+    <!--id 是对应的namespace中的方法名-->
+    <select id="selectGoods" resultType="com.bjp.domain.Goods"><!--这边还有别名可以用-->
+        select id,name,amount,price from springdb.goods where id =#{gid}
+   </select>
+    
+    <update id="updateGoods">
+        update springdb.goods set amount = amount - #{amount} where id =#{id}
+    </update>
+
+</mapper>

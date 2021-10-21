@@ -19,9 +19,10 @@ public class AppTest01 {
         ApplicationContext ctx=new ClassPathXmlApplicationContext(config);
         //从容其中获取的Service
         BuyGoodService buyService = (BuyGoodService)ctx.getBean("buyService");
+        System.out.println(buyService.getClass().getName());
 
         //调用方法
-        buyService.buy(1001,2);
+        // buyService.buy(1001,2);
     }
 
 
