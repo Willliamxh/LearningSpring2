@@ -3,7 +3,10 @@ package com.bjp.service.impl;
 import com.bjp.Dao.GoodsDao;
 import com.bjp.Dao.SaleDao;
 import com.bjp.domain.Goods;
+import com.bjp.domain.Sale;
 import com.bjp.service.BuyGoodService;
+
+import java.sql.Savepoint;
 
 /**
  * @author Willam_xh
@@ -17,7 +20,10 @@ public class BuyGoodServiceImpl implements BuyGoodService {
     @Override
     public void buy(Integer goodsId, Integer nums) {
         //记录销售的信息 向sale表添加记录
-
+        Sale sale=new Sale();
+        sale.setGid(goodsId);
+        sale.setNums(nums);
+        saleDao.insertSale(sale);
         //更新库存
     }
 
