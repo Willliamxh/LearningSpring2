@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bjp.Dao.SaleDao">
+
+    <!--id 是对应的namespace中的方法名-->
+    <insert id="insertSale"><!--这边还有别名可以用-->
+        insert into springdb.sale(gid, nums) VALUES (#{gid},#{nums})
+   </insert>
+
+
+</mapper>
