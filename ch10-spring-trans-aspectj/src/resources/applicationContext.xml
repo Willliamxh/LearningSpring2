@@ -2,7 +2,8 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
 
 
     <!--把数据库的配置信息写在独立的文件中，便于修改数据库的配置内容
@@ -68,7 +69,7 @@
     <!--声明式事务处理：和源代码完全分离的-->
     <!--1.声明事务管理器对象-->
     <bean id="TransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource " ref="myDataSource"/>
+        <property name="dataSource" ref="myDataSource"/>
     </bean>
 
     <!--2.声明我们的业务方法的事务属性（隔离级别、传播行为、超时时间）
@@ -99,6 +100,31 @@
             <tx:method name="*" propagation="SUPPORTS" read-only="true"/>
         </tx:attributes>
     </tx:advice>
+    <!--但是光上面这些还不够 因为我们还要去指定对应的类和包-->
+
+    <!--配置我们的aop-->
+    <aop:config>
+        <!--配置切入点表达式：指定哪些包中的类，要使用事务
+        id：切入点表达式名称，唯一值
+        expression：切入点表达式，指定 哪些类 要使用事务，aspectj会创建代理对象
+
+        com.bjp.service
+        com.crm.service
+        com.service
+                                  返回值   包（*..service）及其子包（..）类（*）.类中的方法（*）
+                                  主要就是改这边的对应的切面目标类
+        -->
+        <aop:pointcut id="servicePt" expression="execution(* *..service..*.*(..))"/>
+        <!--但是指定了对应的包之后 要和对应的事务进行关联-->
+        <!--配置增强器：关联advice和pointCut
+        advice:通知，也就是tx:advice那里的配置
+        pointcut-ref:切入点表达式的id
+        -->                                   <!--servicePt这个切面里面的类和方法 和myAdvice里面一样的话 那就有对应的事务属性
+                                                  aspectj会创建对应的代理对象
+        -->
+        <aop:advisor advice-ref="myAdvice" pointcut-ref="servicePt"/>
+
+    </aop:config>
 
 
 

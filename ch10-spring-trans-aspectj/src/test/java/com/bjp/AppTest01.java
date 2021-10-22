@@ -56,9 +56,17 @@ public class AppTest01 {
         buyService.buy(1001,200);
     }
 
-    /**
-     * 所以 我们需要通过AOP去增加事务的功能
-     */
+    @Test
+    public void test04(){
+        String config="applicationContext.xml";
+        ApplicationContext ctx=new ClassPathXmlApplicationContext(config);
+        //从容其中获取的Service
+        BuyGoodService buyService = (BuyGoodService)ctx.getBean("buyService");
+        System.out.println(buyService.getClass().getName());
+
+        //调用方法
+        buyService.buy(1001,2);
+    }
 
 
 }
