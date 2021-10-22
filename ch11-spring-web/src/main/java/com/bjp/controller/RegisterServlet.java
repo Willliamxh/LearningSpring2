@@ -15,7 +15,9 @@ import java.io.IOException;
 
 public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        /**
+         * 如果没有监听器 会导致一直创建对应的容器
+         */
         String strId = request.getParameter("id");
         String strName = request.getParameter("name");
         String strEmail = request.getParameter("email");
