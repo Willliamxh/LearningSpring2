@@ -517,3 +517,4 @@ web项目中容器对象只需要创建一次，  把容器对象放入到全局
      3. 整个项目使用 servlet ，spring + mybatis
 
 ==================spring学习第二轮over ioc aop 事务终于知道清楚流程了。
+补充一个思维导图 https://www.processon.com/mindmap/6164eaf01e085340f841ae89
